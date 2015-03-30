@@ -63,7 +63,7 @@ int   trace_break(t_env *env)
   while (! WIFEXITED(ret_code) || WIFSIGNALED(ret_code))
   {
     tmp = ptrace(PT_GETREGS, env->pid, (caddr_t) &regs, 0);
-    regs.r_eip -= 1;
+    regs.r_rip -= 1;
     tmp = ptrace(PT_SETREGS, env->pid, (caddr_t) &regs, 0);
     if ((sym = trace_sym_find(env, &regs)) != NULL)
     {
@@ -203,7 +203,7 @@ t_sym   *trace_sym_find(t_env *env, struct reg *regs)
   {
     if ((sym = list_get(env->elf_syms, i)) == NULL)
       return (NULL);
-    if (sym->value == regs->r_eip)
+    if (sym->value == regs->r_rip)
       return (sym);
   }
 
