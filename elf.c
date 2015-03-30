@@ -33,7 +33,7 @@ int   elf_header_set(t_env *env)
 
 int   elf_header_check(t_env *env)
 {
-  Elf32_Ehdr  *h;
+  Elf64_Ehdr  *h;
 
   h = env->elf_header;
 
@@ -43,10 +43,6 @@ int   elf_header_check(t_env *env)
   if ((h->e_ident[EI_MAG0] != ELFMAG0) || (h->e_ident[EI_MAG1] != ELFMAG1) ||
       (h->e_ident[EI_MAG2] != ELFMAG2) || (h->e_ident[EI_MAG3] != ELFMAG3))
     return (ERR);
-#ifndef   __linux__
-  if ((h->e_machine != EM_386) && (h->e_machine != EM_486))
-    return (ERR);
-#endif
   if (h->e_type != ET_EXEC)
     return (ERR);
   if (h->e_version != EV_CURRENT)
@@ -57,7 +53,7 @@ int   elf_header_check(t_env *env)
 
 int   elf_sections_set(t_env *env)
 {
-  Elf32_Shdr  *s;
+  Elf64_Shdr  *s;
   int         i;
   void        *start;
   int         step;
@@ -81,7 +77,7 @@ int   elf_sections_set(t_env *env)
 
 int   elf_shstrtab_set(t_env *env)
 {
-  Elf32_Shdr  *s;
+  Elf64_Shdr  *s;
   void        *start;
 
   if (!env->elf_header)
@@ -99,7 +95,7 @@ int   elf_shstrtab_set(t_env *env)
 
 int   elf_symtab_set(t_env *env)
 {
-  Elf32_Shdr  *tmp_sect;
+  Elf64_Shdr  *tmp_sect;
 
   if (!env->elf_sections)
     return (ERR);
@@ -116,7 +112,7 @@ int   elf_symtab_set(t_env *env)
 
 int   elf_strtab_set(t_env *env)
 {
-  Elf32_Shdr  *tmp_sect;
+  Elf64_Shdr  *tmp_sect;
 
   if (!env->elf_sections)
     return (ERR);
@@ -132,7 +128,7 @@ int   elf_strtab_set(t_env *env)
 
 int   elf_stabs_set(t_env *env)
 {
-  Elf32_Shdr  *tmp_sect;
+  Elf64_Shdr  *tmp_sect;
 
   if (!env->elf_sections)
     return (ERR);
@@ -149,8 +145,8 @@ int   elf_stabs_set(t_env *env)
 
 int   elf_sym_set(t_env *env)
 {
-  Elf32_Sym *symtab;
-  Elf32_Sym *tmp;
+  Elf64_Sym *symtab;
+  Elf64_Sym *tmp;
   int       i;
   t_sym     *sym;
   char      *to_dup;
@@ -159,7 +155,7 @@ int   elf_sym_set(t_env *env)
     return (ERR);
 
   symtab = env->elf_symtab;
-  for (i = 0; i < (env->elf_symtab_size / sizeof(Elf32_Sym)); i++)
+  for (i = 0; i < (env->elf_symtab_size / sizeof(Elf64_Sym)); i++)
   {
     tmp = &symtab[i];
     if (ELF32_ST_TYPE(tmp->st_info) != STT_FUNC)
@@ -174,10 +170,10 @@ int   elf_sym_set(t_env *env)
   return (OK);
 }
 
-Elf32_Shdr  *elf_sections_get(t_env *env, char *name)
+Elf64_Shdr  *elf_sections_get(t_env *env, char *name)
 {
   int         i;
-  Elf32_Shdr  *tmp;
+  Elf64_Shdr  *tmp;
 
   for (i = 0; i < list_count(env->elf_sections); i++)
   {
