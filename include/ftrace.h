@@ -3,8 +3,6 @@
 
 #include  <elf.h>
 
-#include  "reg.h"
-
 /* DEFINES */
 
 #define   MODE_UNSET  0
@@ -131,7 +129,6 @@ int     xclose(int fd, char *path, int size);
 int     trace(t_env *env);
 int     trace_break(t_env *env);
 int     trace_step(t_env *env);
-void    trace_reg_check(t_env *env, struct reg regs);
 int     trace_sym_init(t_env *env);
 t_sym   *trace_sym_find(t_env *env, struct reg *regs);
 void    trace_print(t_env *env, t_sym *sym);
@@ -178,6 +175,5 @@ char    *stabs_struct_start(t_env *env, char *line);
 t_list  **stabs_store_list(t_env *env, char *s);
 int     stabs_store_struct(t_env *env, char *elem);
 t_stab  *stabs_last_func(t_env *env);
-int     trace_print_sys(t_env *env, t_sym *sym);
 
 #endif

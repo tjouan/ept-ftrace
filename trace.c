@@ -30,8 +30,6 @@ int   trace(t_env *env)
       lav[1] = NULL;
       if (execvp(env->path, lav) == -1)
         perror("execvp ");
-      //FIXME: error
-      //printf("normalement on arrive jamais ici :P\n");
     }
   }
   else if (env->mode == MODE_ATTACH)
@@ -106,7 +104,6 @@ int   trace_step(t_env *env)
       perror ("ptrace ");
       return (ERR);
     }
-    /*trace_reg_check(env, regs);*/
     if ((sym = trace_sym_find(env, &regs)) != NULL)
       if (trace_print_sys(env, sym) != OK)
         trace_print(env, sym);
@@ -190,23 +187,6 @@ int   trace_sym_init(t_env *env)
   }
 
   return (OK);
-}
-
-void    trace_reg_check(t_env *env, struct reg regs)
-{
-  int   i;
-  t_sym *sym;
-
-  for (i = 0; i < list_count(env->elf_syms); i++)
-  {
-    if ((sym = list_get(env->elf_syms, i)) == NULL)
-      return;
-    if (sym->value == regs.r_eip)
-    {
-      printf("> %s\n", sym->name);
-      return;
-    }
-  }
 }
 
 t_sym   *trace_sym_find(t_env *env, struct reg *regs)
