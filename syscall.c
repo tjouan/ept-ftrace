@@ -1,10 +1,7 @@
 #include  "ftrace.h"
 
 #include  <stdio.h>
-
-#ifdef    __linux__
 #include  <string.h>
-#endif
 
 t_systab  systab[] = {
   {"int", "syscall", "int, ...", "int syscall(int, ...)"},

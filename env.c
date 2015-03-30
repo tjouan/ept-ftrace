@@ -2,10 +2,7 @@
 
 #include  <stdio.h>
 #include  <stdlib.h>
-
-#ifdef    __linux__
 #include  <string.h>
-#endif
 
 t_env   *env_init()
 {

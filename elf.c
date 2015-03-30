@@ -2,10 +2,7 @@
 
 #include  <stdlib.h>
 #include  <stdio.h>
-
-#ifdef    __linux__
 #include  <string.h>
-#endif
 
 int   elf_parse(t_env *env)
 {
