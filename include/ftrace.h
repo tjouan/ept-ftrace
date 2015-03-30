@@ -132,6 +132,7 @@ int     trace_step(t_env *env);
 int     trace_sym_init(t_env *env);
 void    trace_print(t_env *env, t_sym *sym);
 void    trace_print_params(t_env *env, t_stab *f);
+int     trace_print_sys(t_env *env, t_sym *sym);
 
 /* info.c */
 int     info(t_env *env);
