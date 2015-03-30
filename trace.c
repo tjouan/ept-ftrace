@@ -11,6 +11,8 @@
 #include  <string.h>
 #endif
 
+t_sym   *trace_sym_find(t_env *env, struct reg *regs);
+
 int   trace(t_env *env)
 {
   char    *lav[2];

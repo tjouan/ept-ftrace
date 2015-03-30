@@ -54,7 +54,7 @@ struct    s_sym
   int     value;
   int     alt_val;
 };
-typedef struct s_sym  t_sym;
+typedef struct s_sym t_sym;
 
 struct    s_stab
 {
@@ -130,7 +130,6 @@ int     trace(t_env *env);
 int     trace_break(t_env *env);
 int     trace_step(t_env *env);
 int     trace_sym_init(t_env *env);
-t_sym   *trace_sym_find(t_env *env, struct reg *regs);
 void    trace_print(t_env *env, t_sym *sym);
 void    trace_print_params(t_env *env, t_stab *f);
 
