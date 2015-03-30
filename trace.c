@@ -18,17 +18,17 @@ int   trace(t_env *env)
   {
     if ((env->pid = fork()) == -1)
     {
-      perror("fork ");
+      perror("fork");
       return (ERR);
     }
     if (! env->pid)
     {
       if (ptrace(PT_TRACE_ME, 0, 0, 0) != 0)
-        perror("ptrace ");
+        perror("ptrace");
       lav[0] = xstrdup(env->path);
       lav[1] = NULL;
       if (execvp(env->path, lav) == -1)
-        perror("execvp ");
+        perror("execvp");
     }
   }
   else if (env->mode == MODE_ATTACH)
@@ -100,7 +100,7 @@ int   trace_step(t_env *env)
   {
     if (ptrace (PT_GETREGS, env->pid, (caddr_t) &regs, 0) != 0)
     {
-      perror ("ptrace ");
+      perror ("ptrace");
       return (ERR);
     }
     if ((sym = trace_sym_find(env, &regs)) != NULL)
@@ -108,7 +108,7 @@ int   trace_step(t_env *env)
         trace_print(env, sym);
     if (ptrace(PT_STEP, env->pid, (caddr_t) 1, 0) != 0)
     {
-      perror("ptrace ");
+      perror("ptrace");
       return (ERR);
     }
     wait(&ret_code);

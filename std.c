@@ -14,7 +14,7 @@ void    *xmalloc(int size)
 
   if (! (p = calloc(1, size)))
   {
-    perror("malloc ");
+    perror("malloc");
     exit(EXIT_FAILURE);
   }
 
@@ -40,7 +40,7 @@ int   xopen(char *path)
 
   if ((fd = open(path, O_RDONLY)) == -1)
   {
-    perror("open ");
+    perror("open");
     exit(EXIT_FAILURE);
   }
 
@@ -51,13 +51,13 @@ int   xclose(int fd, char *path, int size)
 {
   if (close(fd) == -1)
   {
-    perror("close ");
+    perror("close");
     exit(EXIT_FAILURE);
   }
 
   if (munmap(path, (size_t) size) == -1)
   {
-    perror("munmap ");
+    perror("munmap");
     exit(EXIT_FAILURE);
   }
 
@@ -70,7 +70,7 @@ int   file_size(char *path)
 
   if (stat(path, &info) != 0)
   {
-    perror("stat ");
+    perror("stat");
     exit(EXIT_FAILURE);
   }
 
@@ -83,7 +83,7 @@ void    *file_mmap(int fd, int size)
 
   if ((ret = mmap(0, (size_t) size, PROT_READ, MAP_PRIVATE, fd, 0)) == MAP_FAILED)
   {
-    perror("mmap ");
+    perror("mmap");
     exit(EXIT_FAILURE);
   }
 
