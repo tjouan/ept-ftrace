@@ -11,7 +11,7 @@ int   list_add(t_list **list, void *data)
   new->ptr = data;
   new->next = NULL;
 
-  if (! *list)
+  if (!*list)
   {
     new->idx = 0;
     *list = new;
@@ -30,7 +30,7 @@ void    *list_get(t_list *list, int idx)
 {
   t_list  *tmp;
 
-  if (! list)
+  if (!list)
     return (NULL);
 
   if (idx >= list_count(list))
@@ -59,7 +59,7 @@ void    list_destroy(t_list *list)
   t_list  *tmp;
   t_list  *todel = 0;
 
-  if (! list)
+  if (!list)
     return;
 
   for (tmp = list; tmp; tmp = tmp->next)

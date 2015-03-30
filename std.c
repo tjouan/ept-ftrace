@@ -12,7 +12,7 @@ void    *xmalloc(int size)
 {
   void    *p;
 
-  if (! (p = calloc(1, size)))
+  if (!(p = calloc(1, size)))
   {
     perror("malloc");
     exit(EXIT_FAILURE);

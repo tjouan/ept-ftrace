@@ -37,7 +37,7 @@ int   elf_header_check(t_env *env)
 
   h = env->elf_header;
 
-  if (! h)
+  if (!h)
     return (ERR);
 
   if ((h->e_ident[EI_MAG0] != ELFMAG0) || (h->e_ident[EI_MAG1] != ELFMAG1) ||
@@ -62,7 +62,7 @@ int   elf_sections_set(t_env *env)
   void        *start;
   int         step;
 
-  if (! env->elf_header)
+  if (!env->elf_header)
     return (ERR);
   if (env->elf_header->e_shnum == 0)
     return (ERR);
@@ -84,7 +84,7 @@ int   elf_shstrtab_set(t_env *env)
   Elf32_Shdr  *s;
   void        *start;
 
-  if (! env->elf_header)
+  if (!env->elf_header)
     return (ERR);
   if (env->elf_header->e_shstrndx == 0)
     return (ERR);
@@ -101,7 +101,7 @@ int   elf_symtab_set(t_env *env)
 {
   Elf32_Shdr  *tmp_sect;
 
-  if (! env->elf_sections)
+  if (!env->elf_sections)
     return (ERR);
 
   if ((tmp_sect = elf_sections_get(env, ".symtab")) == ERR)
@@ -118,7 +118,7 @@ int   elf_strtab_set(t_env *env)
 {
   Elf32_Shdr  *tmp_sect;
 
-  if (! env->elf_sections)
+  if (!env->elf_sections)
     return (ERR);
 
   if ((tmp_sect = elf_sections_get(env, ".strtab")) == ERR)
@@ -134,7 +134,7 @@ int   elf_stabs_set(t_env *env)
 {
   Elf32_Shdr  *tmp_sect;
 
-  if (! env->elf_sections)
+  if (!env->elf_sections)
     return (ERR);
 
   if ((tmp_sect = elf_sections_get(env, ".stabstr")) == ERR)
@@ -155,7 +155,7 @@ int   elf_sym_set(t_env *env)
   t_sym     *sym;
   char      *to_dup;
 
-  if (! env->elf_symtab)
+  if (!env->elf_symtab)
     return (ERR);
 
   symtab = env->elf_symtab;
@@ -183,7 +183,7 @@ Elf32_Shdr  *elf_sections_get(t_env *env, char *name)
   {
     if ((tmp = list_get(env->elf_sections, i)) == NULL)
       return (ERR);
-    if (! strcmp(&env->elf_shstrtab[tmp->sh_name], name))
+    if (!strcmp(&env->elf_shstrtab[tmp->sh_name], name))
       return (tmp);
   }
 

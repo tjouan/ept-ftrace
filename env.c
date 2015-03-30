@@ -46,7 +46,7 @@ void    env_print(t_env *env)
 
 void    env_check(t_env *env, char **av)
 {
-  if (((! env->path) && (! env->pid)) || (env->path && env->pid))
+  if (((!env->path) && (!env->pid)) || (env->path && env->pid))
   {
     usage(av[0]);
     exit(EXIT_FAILURE);
@@ -76,18 +76,18 @@ void    env_conf(t_env *env, char **av)
 
   for (i = 1; av[i]; i++)
   {
-    if (! strcmp(av[i], ARG_HELP))
+    if (!strcmp(av[i], ARG_HELP))
     {
       usage(av[0]);
       exit(EXIT_SUCCESS);
     }
-    else if (! strcmp(av[i], ARG_VERB))
+    else if (!strcmp(av[i], ARG_VERB))
       env->verb = VERBOSE_ON;
-    else if (! strcmp(av[i], ARG_STEP))
+    else if (!strcmp(av[i], ARG_STEP))
       env->tr_mode = TR_MODE_STEP;
-    else if (! strcmp(av[i], ARG_BREAK))
+    else if (!strcmp(av[i], ARG_BREAK))
       env->tr_mode = TR_MODE_BREAK;
-    else if (! strcmp(av[i], ARG_PID))
+    else if (!strcmp(av[i], ARG_PID))
     {
       if (av[i + 1])
       {

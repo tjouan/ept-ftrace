@@ -21,7 +21,7 @@ int   trace(t_env *env)
       perror("fork");
       return (ERR);
     }
-    if (! env->pid)
+    if (!env->pid)
     {
       if (ptrace(PT_TRACE_ME, 0, 0, 0) != 0)
         perror("ptrace");
@@ -57,7 +57,7 @@ int   trace_break(t_env *env)
     return (ERR);
   ptrace(PT_CONTINUE, env->pid, (caddr_t) 1, 0);
   wait(&ret_code);
-  while (! WIFEXITED(ret_code) || WIFSIGNALED(ret_code))
+  while (!WIFEXITED(ret_code) || WIFSIGNALED(ret_code))
   {
     tmp = ptrace(PT_GETREGS, env->pid, (caddr_t) &regs, 0);
     regs.r_rip -= 1;
@@ -96,7 +96,7 @@ int   trace_step(t_env *env)
   t_sym       *sym;
 
   wait(&ret_code);
-  while (! WIFEXITED(ret_code))
+  while (!WIFEXITED(ret_code))
   {
     if (ptrace (PT_GETREGS, env->pid, (caddr_t) &regs, 0) != 0)
     {
@@ -156,7 +156,7 @@ void    trace_print_params(t_env *env, t_stab *f)
     if ((p = list_get(f->ln_param, i)) == NULL)
       return;
     type = p->ln_type;
-    if (! type)
+    if (!type)
       printf("? ");
     else
       printf("%s ", type->name);
@@ -193,7 +193,7 @@ t_sym   *trace_sym_find(t_env *env, struct reg *regs)
   int   i;
   t_sym *sym;
 
-  if (! regs)
+  if (!regs)
     return (NULL);
 
   for (i = 0; i < list_count(env->elf_syms); i++)

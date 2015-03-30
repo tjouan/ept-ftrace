@@ -12,7 +12,7 @@ int   stabs_parse(t_env *env)
   t_stab  *stab;
   t_stab  *func;
 
-  if (! env->elf_stabs)
+  if (!env->elf_stabs)
     return (ERR);
 
   for (line = stabs_get_line(env); line; line = stabs_get_line(env))
@@ -60,12 +60,12 @@ t_list    **stabs_store_list(t_env *env, char *s)
   char    *p;
   t_list        **list;
 
-  if (! s)
+  if (!s)
     return (NULL);
   if ((p = strchr(s, STAB_TOK_SEP)) == NULL)
     return (NULL);
   p++;
-  if (! *p)
+  if (!*p)
     return (NULL);
   if (*p == STAB_TOK_TYPE)
     list = &(env->st_type);
@@ -85,7 +85,7 @@ int   stabs_is_struct(t_env *env, char *line)
 {
   char    *p;
 
-  if (! line)
+  if (!line)
     return (0);
   if ((p = strchr(line, STAB_TOK_SEP)) == NULL)
     return (0);
@@ -104,10 +104,10 @@ int   stabs_parse_struct(t_env *env, char *line)
   elem = stabs_struct_next(env, line, stabs_struct_start(env, line));
   for (; elem; elem = stabs_struct_next(env, line, 0))
   {
-    if (! elem)
+    if (!elem)
       return (OK);
 
-    if (! strcmp(elem, "?"))
+    if (!strcmp(elem, "?"))
     {
       free(line);
       line = stabs_get_line(env);
@@ -143,14 +143,14 @@ char    *stabs_struct_start(t_env *env, char *line)
 {
   char    *ptr;
 
-  if (! line)
+  if (!line)
     return (NULL);
 
   if ((ptr = strchr(line, STAB_TOK_SEP)) == NULL)
     return (NULL);
   if ((ptr = strchr(ptr, '=')) == NULL)
     return (NULL);
-  if (! *++ptr)
+  if (!*++ptr)
     return (NULL);
   while (*++ptr)
     if (*ptr < '0' || *ptr > '9')
@@ -169,7 +169,7 @@ char    *stabs_struct_next(t_env *env, char *line, char *new_ptr)
     ptr = new_ptr;
 
   start = ptr;
-  if (! start)
+  if (!start)
     return (NULL);
   if (*start == ';')
     return (NULL);
@@ -192,7 +192,7 @@ char    *stabs_get_line(t_env *env)
   if (ptr >= env->elf_stabs + env->elf_stabs_size)
     return (NULL);
 
-  if (! ptr)
+  if (!ptr)
     ptr = env->elf_stabs;
 
   ret = ptr;
@@ -232,7 +232,7 @@ t_stab    *stabs_refer_type(t_env *env, t_stab *s)
 {
   t_stab  *find;
 
-  if (! s || ! s->type)
+  if (!s || !s->type)
     return (NULL);
 
   if (s->end_ptr)
@@ -278,14 +278,14 @@ t_stab    *stabs_refer_type_alt(t_env *env, t_stab *s)
   static t_stab *ref = 0;
   t_stab  *find;
 
-  if (! s || ! s->type)
+  if (!s || !s->type)
   {
     st = 0;
     ref = 0;
     return (NULL);
   }
 
-  if (! ref)
+  if (!ref)
     ref = s;
 
   if ((find = stabs_list_get_type(env->st_type, s->type)) != NULL)
@@ -296,7 +296,7 @@ t_stab    *stabs_refer_type_alt(t_env *env, t_stab *s)
     return (find);
   }
 
-  if (! s->end_ptr)
+  if (!s->end_ptr)
   {
     st = 0;
     ref = 0;
@@ -331,13 +331,13 @@ t_stab    *stabs_list_get_type(t_list *list, char *type)
   int   i;
   t_stab  *s;
 
-  if (! list || ! type)
+  if (!list || !type)
     return (NULL);
 
   for (i = 0; i < list_count(list); i++)
   {
     s = list_get(list, i);
-    if (! strcmp(s->type, type))
+    if (!strcmp(s->type, type))
       return (s);
   }
 
