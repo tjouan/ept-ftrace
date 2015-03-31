@@ -1,4 +1,9 @@
-ELF tracer
-2004 school project
+ftrace (ELF tracer, 2004 school project)
 
-Current status: build with a lot of warning, unable to read ELF information
+Project status (2015):
+
+* build with warnings
+* print function calls
+* syscall tracing seems broken:
+  - hard coded syscall table cannot be correct
+  - generation script is not portable
